@@ -1,0 +1,24 @@
+.button {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  height: 25px;
+  width: 80px;
+  border: none;
+  background-color: transparent;
+  color: rgb(218, 40, 40);
+  cursor: pointer;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  color: green;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}

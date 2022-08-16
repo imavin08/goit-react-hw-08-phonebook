@@ -1,0 +1,39 @@
+.form {
+  border: 1px solid black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  position: sticky;
+  top: 0;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 130px;
+  margin-top: 5px;
+  outline: none;
+  border-radius: 5px;
+  border-color: transparent;
+}
+
+.btn {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  width: 110px;
+  height: 30px;
+  color: green;
+  border: 1px solid green;
+  border-radius: 5px;
+  background-color: transparent;
+  padding-right: 0;
+}
