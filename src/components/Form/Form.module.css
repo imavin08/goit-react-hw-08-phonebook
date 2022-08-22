@@ -1,5 +1,17 @@
+.box {
+  width: 400px;
+  margin-right: 20px;
+}
+
+.title {
+  margin: 0;
+  margin-bottom: 5px;
+  text-align: center;
+  color: whitesmoke;
+}
+
 .form {
-  border: 1px solid black;
+  border: 1px solid whitesmoke;
   padding-top: 20px;
   padding-bottom: 20px;
   border-radius: 5px;
@@ -13,10 +25,11 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  color: white;
 }
 
 .input {
-  width: 130px;
+  width: 150px;
   margin-top: 5px;
   outline: none;
   border-radius: 5px;
@@ -24,16 +37,10 @@
 }
 
 .btn {
-  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  cursor: pointer;
   width: 110px;
   height: 30px;
-  color: green;
-  border: 1px solid green;
-  border-radius: 5px;
-  background-color: transparent;
   padding-right: 0;
 }

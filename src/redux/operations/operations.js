@@ -27,9 +27,9 @@ export const deleteContact = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'contacts/addContacts',
-  async ({ name, phone: number }) => {
+  async ({ name, number }) => {
     try {
-      const contact = await api.addContact({ name, phone: number });
+      const contact = await api.addContact({ name, number });
       return contact;
     } catch (error) {
       console.log(error.message);

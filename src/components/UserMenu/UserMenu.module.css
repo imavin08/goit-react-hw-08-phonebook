@@ -1,0 +1,11 @@
+.userMenuBox {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.userEmail {
+  margin: 0;
+  margin-right: 10px;
+  color: whitesmoke;
+}

@@ -19,7 +19,7 @@ export const LoaderDelete = () => {
       height="15"
       width="15"
       radius="12"
-      color="red"
+      color="white"
       ariaLabel="three-dots-loading"
       wrapperStyle
     />
@@ -32,7 +32,7 @@ export const LoaderAdd = () => {
       height="15"
       width="15"
       radius="12"
-      color="green"
+      color="white"
       ariaLabel="three-dots-loading"
       wrapperStyle
     />

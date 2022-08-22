@@ -1,0 +1,10 @@
+.link {
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.authBox {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

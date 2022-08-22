@@ -13,8 +13,8 @@ export const filterReducer = createReducer('', {
 export const entities = createReducer([], {
   [fetchContacts.fulfilled]: (_, action) => action.payload,
   [deleteContact.fulfilled]: (state, action) =>
-    state.filter(item => item.id !== action.payload.id),
-  [addContact.fulfilled]: (state, action) => [action.payload, ...state],
+    state.filter(contact => contact.id !== action.payload),
+  [addContact.fulfilled]: (state, action) => [...state, action.payload],
 });
 
 export const isLoading = createReducer(false, {

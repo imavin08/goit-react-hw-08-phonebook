@@ -1,0 +1,16 @@
+.title {
+  color: whitesmoke;
+  text-align: center;
+}
+
+.text {
+  color: whitesmoke;
+}
+
+.homeBox {
+  width: 900px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

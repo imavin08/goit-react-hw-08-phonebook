@@ -4,8 +4,10 @@ import { fetchContacts } from 'redux/operations/operations';
 import { useEffect } from 'react';
 import { ContactsItem } from './ContactsItem/item';
 import { Loader } from 'components/Loader';
+import Filter from 'components/Filter';
+import css from './ContactsList.module.css';
 
-const ContactsList = () => {
+export default function ContactsList() {
   const contacts = useSelector(state => state.entities);
   const isLoading = useSelector(state => state.isLoading);
   const dispatch = useDispatch();
@@ -21,17 +23,21 @@ const ContactsList = () => {
   }, [dispatch]);
 
   return (
-    <>
-      <ul>
-        {contacts.length > 0
-          ? searchName().map(({ name, id, phone }) => (
-              <ContactsItem name={name} key={id} id={id} phone={phone} />
-            ))
-          : !isLoading && <p>You dont have contacts</p>}
-        {isLoading === 'fetch' && <Loader />}
-      </ul>
-    </>
+    <div className={css.contactsBox}>
+      <h2 className={css.titleContacts}>Contacts</h2>
+      <Filter />
+      {contacts.length > 0 ? (
+        <ul className={css.contactsList}>
+          {searchName().map(({ name, id, number }) => (
+            <ContactsItem name={name} key={id} id={id} number={number} />
+          ))}
+          {isLoading === 'fetch' && <Loader />}
+        </ul>
+      ) : (
+        !isLoading && (
+          <p className={css.text}>You don't have saved contacts yet</p>
+        )
+      )}
+    </div>
   );
-};
-
-export default ContactsList;
+}

@@ -1,0 +1,15 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  display: block;
+  width: 200px;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
