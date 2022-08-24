@@ -13,22 +13,21 @@ const authInitialState = {
   isLoggedIn: false,
   fethCurrentUser: false,
   authStatus: false,
-  erorMessage: '',
 };
 
 export const authReducer = createReducer(authInitialState, {
   [registerUser.pending]: state => {
-    state.authStatus = 'pending';
+    state.authStatus = 'RegPending';
   },
   [registerUser.fulfilled]: (state, action) => {
     state.user = action.payload.user;
     state.token = action.payload.token;
     state.isLoggedIn = true;
+    state.authStatus = false;
   },
 
-  [registerUser.rejected]: (state, action) => {
-    state.authStatus = 'RegistError';
-    state.erorMessage = action.payload.message;
+  [registerUser.rejected]: state => {
+    state.authStatus = 'RegError';
   },
 
   [setAuthStatus]: state => {

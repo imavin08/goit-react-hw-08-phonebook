@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './Login.module.css';
 import { logInUser } from 'redux/operations/auth/authOperations';
 import { useEffect } from 'react';
+import { setAuthStatus } from 'redux/actions/contactsActions';
+import { Loader } from 'components/Loader';
 
 export default function LogIn() {
   const authStatus = useSelector(state => state.auth.authStatus);
@@ -18,6 +20,10 @@ export default function LogIn() {
       Notiflix.Notify.failure('Error: incorrectly entered email or password');
     }
   }, [authStatus]);
+
+  useEffect(() => {
+    return () => dispatch(setAuthStatus());
+  }, [dispatch]);
 
   const handleInputChange = e => {
     const name = e.target.name;
@@ -36,6 +42,9 @@ export default function LogIn() {
 
   const handleFormSubmit = e => {
     e.preventDefault();
+    if (email === '' || password === '') {
+      return alert('Все поля должны быть заполнены');
+    }
     dispatch(logInUser({ email, password }));
   };
 
@@ -64,10 +73,13 @@ export default function LogIn() {
           onChange={handleInputChange}
         />
       </label>
-
-      <Button type="submit" variant="primary" className={css.button}>
-        Log in
-      </Button>
+      {authStatus === 'LogPending' ? (
+        <Loader />
+      ) : (
+        <Button type="submit" variant="primary" className={css.button}>
+          Log in
+        </Button>
+      )}
     </form>
   );
 }

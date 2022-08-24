@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from 'redux/operations/auth/authOperations';
 import css from './Register.module.css';
 import { setAuthStatus } from 'redux/actions/contactsActions';
+import { Loader } from 'components/Loader';
 
 export default function Register() {
   const authStatus = useSelector(state => state.auth.authStatus);
-  const erorMessage = useSelector(state => state.auth.erorMessage);
 
   const dispatch = useDispatch();
   const [name, setName] = useState('');
@@ -17,19 +17,13 @@ export default function Register() {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    if (authStatus === false) {
-      return;
-    } else if (authStatus === 'RegistError') {
-      Notiflix.Notify.failure(`Error ${erorMessage}`, {
-        timeout: 6000,
-      });
+    if (authStatus === 'RegError') {
+      Notiflix.Notify.failure('Error: incorrectly entered email or password');
     }
-  }, [authStatus, dispatch, erorMessage]);
+  }, [authStatus]);
 
   useEffect(() => {
-    return () => {
-      dispatch(setAuthStatus());
-    };
+    return () => dispatch(setAuthStatus());
   }, [dispatch]);
 
   const handleInputChange = e => {
@@ -52,6 +46,10 @@ export default function Register() {
 
   const handleFormSubmit = e => {
     e.preventDefault();
+    if (name === '' || email === '' || password === '') {
+      return alert('Все поля должны быть заполнены');
+    }
+
     dispatch(registerUser({ name, email, password }));
   };
 
@@ -92,10 +90,13 @@ export default function Register() {
           onChange={handleInputChange}
         />
       </label>
-
-      <Button type="submit" variant="primary" className={css.button}>
-        Create account
-      </Button>
+      {authStatus === 'RegPending' ? (
+        <Loader />
+      ) : (
+        <Button type="submit" variant="primary" className={css.button}>
+          Create account
+        </Button>
+      )}
     </form>
   );
 }
