@@ -21,8 +21,6 @@ export default function Form() {
       Notiflix.Notify.success(
         `You have added the contact ${name}, to your list`
       );
-      SetName('');
-      SetNumber('');
       dispatch(setIsLoading());
     }
   }, [dispatch, isLoading, name]);

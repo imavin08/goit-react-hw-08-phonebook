@@ -1,14 +1,36 @@
 import Button from 'react-bootstrap/Button';
+import Notiflix from 'notiflix';
+import { useEffect } from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from 'redux/operations/auth/authOperations';
 import css from './Register.module.css';
+import { setAuthStatus } from 'redux/actions/contactsActions';
 
 export default function Register() {
+  const authStatus = useSelector(state => state.auth.authStatus);
+  const erorMessage = useSelector(state => state.auth.erorMessage);
+
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (authStatus === false) {
+      return;
+    } else if (authStatus === 'RegistError') {
+      Notiflix.Notify.failure(`Error ${erorMessage}`, {
+        timeout: 6000,
+      });
+    }
+  }, [authStatus, dispatch, erorMessage]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setAuthStatus());
+    };
+  }, [dispatch]);
 
   const handleInputChange = e => {
     const name = e.target.name;
@@ -31,9 +53,6 @@ export default function Register() {
   const handleFormSubmit = e => {
     e.preventDefault();
     dispatch(registerUser({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');
   };
 
   return (

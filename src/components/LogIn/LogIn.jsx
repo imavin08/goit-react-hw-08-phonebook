@@ -1,13 +1,23 @@
+import Notiflix from 'notiflix';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import css from './Login.module.css';
 import { logInUser } from 'redux/operations/auth/authOperations';
+import { useEffect } from 'react';
 
 export default function LogIn() {
+  const authStatus = useSelector(state => state.auth.authStatus);
+
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (authStatus === 'LogError') {
+      Notiflix.Notify.failure('Error: incorrectly entered email or password');
+    }
+  }, [authStatus]);
 
   const handleInputChange = e => {
     const name = e.target.name;
@@ -27,8 +37,6 @@ export default function LogIn() {
   const handleFormSubmit = e => {
     e.preventDefault();
     dispatch(logInUser({ email, password }));
-    setEmail('');
-    setPassword('');
   };
 
   return (

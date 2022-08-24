@@ -14,26 +14,26 @@ const token = {
 
 export const registerUser = createAsyncThunk(
   'auth/register',
-  async ({ name, email, password }) => {
+  async ({ name, email, password }, { rejectWithValue }) => {
     try {
       const contact = await api.register({ name, email, password });
       token.setToken(contact.token);
       return contact;
     } catch (error) {
-      console.log(error.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
 export const logInUser = createAsyncThunk(
   'auth/login',
-  async ({ email, password }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
       const contact = await api.logIn({ email, password });
       token.setToken(contact.token);
       return contact;
     } catch (error) {
-      console.log(error.message);
+      return rejectWithValue(error.response.data);
     }
   }
 );
